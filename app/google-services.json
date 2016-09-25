@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "718675869303-2fl630nqtgj92bh1ilb9k6tjb67bk990.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.njlabs.amrita.aid",
+            "certificate_hash": "81C937DA0527B02985FD7D5AF091D43495837487"
+          }
+        },
+        {
           "client_id": "718675869303-70um1lgjliq6btnmr0668ajq1vrooch8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
