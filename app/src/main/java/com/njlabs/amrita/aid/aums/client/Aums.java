@@ -62,6 +62,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -90,7 +92,11 @@ public class Aums {
         this.context = context;
         client = new AumsClient(context);
         client.setProgressListener(progressListener);
-        client.powerUp();
+        try {
+            client.powerUp();
+        } catch (NoSuchAlgorithmException | KeyManagementException e) {
+            e.printStackTrace();
+        }
         semesterMapping = new HashMap<>();
         loadSemesterMapping();
     }
@@ -303,7 +309,7 @@ public class Aums {
                 params.put("htmlPageTopContainer_status", "");
                 params.put("htmlPageTopContainer_action", "UMS-ATD_SHOW_ATDSUMMARY_SCREEN");
                 params.put("htmlPageTopContainer_notify", "");
-                client.setReferer("/aums/Jsp/Attendance/AttendanceReportStudent.jsp");
+                client.setReferrer("/aums/Jsp/Attendance/AttendanceReportStudent.jsp");
                 client.post("/aums/Jsp/Attendance/AttendanceReportStudent.jsp?action=UMS-ATD_INIT_ATDREPORTSTUD_SCREEN&isMenu=true&pagePostSerialID=0", params, new TextResponse() {
 
                     @Override
@@ -313,7 +319,7 @@ public class Aums {
 
                     @Override
                     public void onSuccess(String finalResponseString) {
-                        client.removeReferer();
+                        client.removeReferrer();
 
                         Document doc = Jsoup.parse(finalResponseString);
 
